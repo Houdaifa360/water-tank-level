@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Water Tank Level</title>
+        <script src="jquery.min.js"></script>
+    </head>
+
+    <style>
+        * {
+            font-family: "Courier New", Courier, monospace;
+        }
+        .box {
+            width: 50%;
+            height: 220px;
+            background-color: #ccc;
+            border-radius: 5px;
+            margin: 10rem auto;
+            padding: 10px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 45px;
+            margin-bottom: 1rem;
+        }
+        h1 {
+            font-size: 60px;
+            margin-top: 1rem;
+        }
+    </style>
+
+    <body>
+        <div class="box">
+            <h2>Distance:</h2>
+            <h1>
+                <span id="distance"></span>
+                <span>cm</span>
+            </h1>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                function getDistance() {
+                    var dURL = "/getdistance";
+                    $.ajax({
+                        async: false,
+                        url: dURL,
+                        dataType: "text",
+                        success: function (response) {
+                            $("#distance").html(response);
+                        },
+                        timeout: 500,
+                    });
+                    setTimeout(getDistance, 1500);
+                }
+                getDistance();
+            });
+        </script>
+    </body>
+</html>
